@@ -17,7 +17,8 @@ function captchaVerify(token) {
   loginForm.token = token;
 }
 function loginSubmit() {
-  console.log(loginForm);
+  console.log(JSON.stringify(loginForm));
+
   if (loginForm.username == "" || loginForm.password == "") {
     info.value.textContent = "请将用户名和密码填写完整！";
   } else if (loginForm.token == "") {
@@ -25,7 +26,7 @@ function loginSubmit() {
   } else {
     info.value.textContent = "";
     axios
-      .post("/login", loginForm)
+      .post("/login", JSON.stringify(loginForm))
       .then(function (response) {
         console.log(response);
       })
