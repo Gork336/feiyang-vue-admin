@@ -2,6 +2,8 @@
 
 ## 登陆页面-login1
 
+包含请求：/login
+
 ## Project Setup
 
 ```sh
@@ -19,3 +21,5 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## npm包
