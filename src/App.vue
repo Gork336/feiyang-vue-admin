@@ -1,10 +1,10 @@
 <script setup>
-import Test from "./views/Test.vue";
+import { ref, watch } from "vue";
+//import Test from "./views/Test.vue";
 import login1 from "./views/login/login-1.vue";
 import layout from "./components/layout.vue";
 import asideMenu from "./components/aside.vue";
 import headerMenu from "./components/header.vue";
-import { ref, watch } from "vue";
 
 import { useAsideWidthStore } from "@/stores/asidewidth";
 const asideWidth = useAsideWidthStore();
@@ -12,7 +12,7 @@ console.log("aside初始" + asideWidth.width);
 watch(
   () => asideWidth.width,
   (newWidth) => {
-    console.log("aside检测" + newWidth);
+    // console.log("new aside: " + newWidth);
     fWidth.value = newWidth;
   }
 );
@@ -29,10 +29,7 @@ const fWidth = ref(asideWidth.width);
         <el-header class="custom-header">
           <headerMenu></headerMenu>
         </el-header>
-        <el-main>
-          Main
-          <el-button type="primary"></el-button>
-        </el-main>
+        <el-main> <RouterView></RouterView></el-main>
       </el-container>
     </el-container>
   </div>
@@ -52,7 +49,7 @@ const fWidth = ref(asideWidth.width);
 }
 .custom-aside {
   height: 100%;
-  transition: width 0.5s; 
+  transition: width 0.5s;
 
   /* border-right: 1px solid var(--el-border-color); */
 }

@@ -10,7 +10,8 @@ function double() {
 }
 </script>
 <template>
-  This is test! Current {{ counter.count }}
+  This is test!<br />
+  Current {{ counter.count }}<br />
   <el-button type="primary" @click="increment">increment</el-button>
   <el-button type="primary" @click="double">double</el-button>
 </template>
