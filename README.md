@@ -34,4 +34,9 @@ npm run dev
 npm run build
 ```
 
-## npm包
+## 直接运行
+
+```sh
+cd dist
+python -m http.server
+```
