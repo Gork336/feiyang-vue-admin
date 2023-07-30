@@ -38,20 +38,15 @@ const toggleCollapse = () => {
       <font-awesome-icon icon="fa-solid fa-user-secret" class="icon" />
       <template #title v-if="!collapse">Navigator Two</template>
     </el-menu-item>
-    <RouterLink to="/login1" class="router-a"
+
+    <RouterLink to="/main/users" class="router-a"
       ><el-menu-item index="3">
-        <font-awesome-icon icon="fa-solid fa-user-secret" class="icon" />
-        <template #title v-if="!collapse">login</template>
-      </el-menu-item></RouterLink
-    >
-    <RouterLink to="/users" class="router-a"
-      ><el-menu-item index="4">
         <font-awesome-icon icon="fa-solid fa-users" size="lg" class="icon" />
         <template #title v-if="!collapse">用户列表</template>
       </el-menu-item></RouterLink
     >
-    <RouterLink to="/" class="router-a"
-      ><el-menu-item index="5">
+    <RouterLink to="/main" class="router-a"
+      ><el-menu-item index="4">
         <font-awesome-icon
           icon="fa-solid fa-users-gear"
           size="lg"
@@ -60,14 +55,24 @@ const toggleCollapse = () => {
         <template #title v-if="!collapse">技术员列表</template>
       </el-menu-item></RouterLink
     >
-    <RouterLink to="/" class="router-a"
+    <RouterLink to="/main" class="router-a"
       ><el-menu-item index="6">
         <font-awesome-icon
           icon="fa-solid fa-user-secret"
           size="lg"
           class="icon"
         />
-        <template #title v-if="!collapse">root /</template>
+        <template #title v-if="!collapse">/main</template>
+      </el-menu-item></RouterLink
+    >
+    <RouterLink to="/login1" class="router-a"
+      ><el-menu-item index="6">
+        <font-awesome-icon
+          icon="fa-solid fa-user-secret"
+          size="lg"
+          class="icon"
+        />
+        <template #title v-if="!collapse">退出登录</template>
       </el-menu-item></RouterLink
     >
   </el-menu>

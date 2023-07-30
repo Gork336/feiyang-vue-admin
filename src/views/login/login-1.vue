@@ -2,6 +2,7 @@
 import { reactive, ref, onMounted } from "vue";
 import VueHcaptcha from "@hcaptcha/vue3-hcaptcha";
 import axios from "axios";
+import router from "../../router/mainRouter";
 
 const info = ref(null);
 const sitekey = "10000000-ffff-ffff-ffff-000000000001";
@@ -35,6 +36,10 @@ function loginSubmit() {
       });
   }
 }
+
+function toMain(){
+  router.push("/main")
+}
 </script>
 
 <template>
@@ -54,6 +59,9 @@ function loginSubmit() {
 
       <el-form-item>
         <el-button type="primary" @click="loginSubmit">登录</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="toMain">去主界面（test）</el-button>
       </el-form-item>
       <p ref="info" class="warning"></p>
     </el-form>
