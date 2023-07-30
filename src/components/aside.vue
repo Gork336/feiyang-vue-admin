@@ -50,10 +50,10 @@ const toggleCollapse = () => {
         <template #title v-if="!collapse">users</template>
       </el-menu-item></RouterLink
     >
-    <RouterLink to="/test" class="router-a"
+    <RouterLink to="/" class="router-a"
       ><el-menu-item index="5">
         <font-awesome-icon icon="fa-solid fa-user-secret" class="icon" />
-        <template #title v-if="!collapse">test</template>
+        <template #title v-if="!collapse">root /</template>
       </el-menu-item></RouterLink
     >
   </el-menu>

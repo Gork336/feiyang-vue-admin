@@ -26,7 +26,7 @@ function loginSubmit() {
   } else {
     info.value.textContent = "";
     axios
-      .post("/login", JSON.stringify(loginForm))
+      .post("/login", loginForm)
       .then(function (response) {
         console.log(response);
       })
