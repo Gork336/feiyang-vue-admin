@@ -1,69 +1,63 @@
 <script setup>
-import { onMounted } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import axios from "axios";
-// const usersData = ref([]); // 用于存储从后端获取的数据
+//import staticUsersData from "@/staticJson/staticUsersData.json";
+//console.log(staticUsersData);
+const usersData = ref([]); // 用于存储从后端获取的数据
+//usersData.value = staticUsersData;
+onMounted(() => {
+  // 在页面加载时发送异步请求获取数据
+  axios
+    .post("/getUsers")
+    .then(function (response) {
+      usersData.value = response.data; // 将从后端获取的数据保存在usersData中
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+const total = computed(() => {
+  console.log(usersData.value.length);
+  return usersData.value.length;
+});
 
-// onMounted(() => {
-//   // 在页面加载时发送异步请求获取数据
-//   axios
-//     .post("/getUsers")
-//     .then(function (response) {
-//       usersData.value = response.data; // 将从后端获取的数据保存在usersData中
-//       console.log(response);
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     });
-// });
-
-const staticData = [
-  {
-    user_id: "202300001",
-    username: "kaze",
-    phone_no: "17313194059",
-    qq_no: "1194677153",
-  },
-  {
-    user_id: "202300001",
-    username: "kaze",
-    phone_no: "17313194059",
-    qq_no: "1194677153",
-  },
-  {
-    user_id: "202300001",
-    username: "kaze",
-    phone_no: "17313194059",
-    qq_no: "1194677153",
-  },
-  {
-    user_id: "202300001",
-    username: "kaze",
-    phone_no: "17313194059",
-    qq_no: "1194677153",
-  },
-  {
-    user_id: "202300001",
-    username: "kaze",
-    phone_no: "17313194059",
-    qq_no: "1194677153",
-  },
-  {
-    user_id: "202300001",
-    username: "kaze",
-    phone_no: "17313194059",
-    qq_no: "1194677153",
-  },
-];
+const pageSize = ref(10); //每页多少条
+const currentPage = ref(1); //当前页
+const currentPageData = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value;
+  const end = start + pageSize.value;
+  return usersData.value.slice(start, end);
+});
+watch(
+  () => currentPage.value,
+  (newPage) => {
+    currentPage.value = newPage;
+    console.log("newPage: " + newPage);
+  }
+);
+watch(
+  () => pageSize.value,
+  (newSize) => {
+    pageSize.value = newSize;
+    console.log("newSize: " + newSize);
+  }
+);
 </script>
 <template>
-  <el-table :data="staticData" height="90%" style="width: 100%">
+  <el-table :data="currentPageData" style="width: 100%">
     <el-table-column prop="user_id" label="用户ID"></el-table-column>
     <el-table-column prop="username" label="用户名"></el-table-column>
     <el-table-column prop="phone_no" label="电话号码"></el-table-column>
     <el-table-column prop="qq_no" label="QQ号码"></el-table-column>
   </el-table>
   <div class="pagination-block">
-    <el-pagination layout="total, prev, pager, next" :total="1000" />
+    <el-pagination
+      layout=" sizes, prev, pager, next, jumper, total"
+      v-model:page-size="pageSize"
+      :total="total"
+      v-model:current-page="currentPage"
+    />
   </div>
 </template>
 <style scoped></style>

@@ -10,6 +10,8 @@ import {
   faBars,
   faCircleArrowLeft,
   faCircleArrowRight,
+  faUsers,
+  faUsersGear
 } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
@@ -19,7 +21,9 @@ library.add(
   faTwitter,
   faBars,
   faCircleArrowLeft,
-  faCircleArrowRight
+  faCircleArrowRight,
+  faUsers,
+  faUsersGear
 );
 
 export { FontAwesomeIcon };
