@@ -48,7 +48,7 @@ function loginSubmit() {
           info.value.textContent = "账号或者密码错误，请重试";
         }
 
-        if (token) {
+        if (captchaValid === "true" && accountValid === "true" && token) {
           localStorage.setItem("jwtToken", token);
           loginStatus.isAuthenticated = "true";
           router.push("/main");
