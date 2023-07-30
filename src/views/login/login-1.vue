@@ -29,13 +29,7 @@ function loginSubmit() {
     axios
       .post("/login", loginForm)
       .then(function (response) {
-        response = {
-          captchaValid: "true",
-          accountValid: "true",
-          token: "123",
-        };
         const { captchaValid, accountValid, token } = response.data;
-        // 进行相应的操作，根据需要使用得到的信息
         if (captchaValid === "true") {
           // 验证码验证成功
           info.value.textContent = "";
@@ -57,7 +51,7 @@ function loginSubmit() {
           // 在此处进行需要登录后的操作，例如导航到其他页面等
         } else {
           // 登录失败，没有获取到有效的 token
-          console.log("没有获取到token");
+          console.log("token为空！");
         }
         console.log(response);
       })

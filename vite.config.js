@@ -20,7 +20,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes("node_modules/@element-plus")) {
+          if (id.includes("element-plus")) {
             return "element-plus";
           }
         },
