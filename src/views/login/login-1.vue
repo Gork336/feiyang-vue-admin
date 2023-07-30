@@ -4,6 +4,9 @@ import VueHcaptcha from "@hcaptcha/vue3-hcaptcha";
 import axios from "axios";
 import router from "../../router/mainRouter";
 
+import { useLoginStatusStore } from "@/stores/loginStatus";
+const loginStatus = useLoginStatusStore();
+
 const info = ref(null);
 const sitekey = "10000000-ffff-ffff-ffff-000000000001";
 //const sitekey = "9ffd0b46-5be5-4711-85de-0be0ede57159";
@@ -47,6 +50,7 @@ function loginSubmit() {
 
         if (token) {
           localStorage.setItem("jwtToken", token);
+          loginStatus.isAuthenticated = "true";
           router.push("/main");
           // 在此处进行需要登录后的操作，例如导航到其他页面等
         } else {

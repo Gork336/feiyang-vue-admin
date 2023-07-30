@@ -4,9 +4,11 @@ import Test from "@/views/Test.vue";
 import usersTable from "@/views/tables/usersTable.vue";
 import layout from "@/components/layout.vue";
 
+import { useLoginStatusStore } from "@/stores/loginStatus";
+
 const routes = [
-  { path: "/", redirect: '/login1' },
-  { path: "/login1", component: login1 },
+  { path: "/", redirect: "/login1" },
+  { path: "/login1", name: "LoginPage", component: login1 },
   {
     path: "/main",
     component: layout,
@@ -24,6 +26,16 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+router.beforeEach(async (to, from) => {
+  const loginStatus = useLoginStatusStore();
+  console.log(loginStatus.isAuthenticated + "+" + to.name);
+  console.log(loginStatus.isAuthenticated && to.name !== "LoginPage")
+  if (!loginStatus.isAuthenticated && to.name !== "LoginPage") {
+    // 将用户重定向到登录页面
+    alert("请登录！")
+    return { name: "LoginPage" };
+  }
 });
 
 export default router;
