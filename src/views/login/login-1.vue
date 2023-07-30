@@ -29,6 +29,36 @@ function loginSubmit() {
     axios
       .post("/login", loginForm)
       .then(function (response) {
+        response = {
+          captchaValid: "true",
+          accountValid: "true",
+          token: "123",
+        };
+        const { captchaValid, accountValid, token } = response.data;
+        // 进行相应的操作，根据需要使用得到的信息
+        if (captchaValid === "true") {
+          // 验证码验证成功
+          info.value.textContent = "";
+        } else {
+          // 验证码验证失败
+          info.value.textContent = "验证失败，请重试";
+        }
+        if (accountValid === "true") {
+          // 账号验证成功
+          info.value.textContent = "";
+        } else {
+          // 账号验证失败
+          info.value.textContent = "账号或者密码错误，请重试";
+        }
+
+        if (token) {
+          localStorage.setItem("jwtToken", token);
+          router.push("/main");
+          // 在此处进行需要登录后的操作，例如导航到其他页面等
+        } else {
+          // 登录失败，没有获取到有效的 token
+          console.log("没有获取到token");
+        }
         console.log(response);
       })
       .catch(function (error) {
@@ -37,8 +67,8 @@ function loginSubmit() {
   }
 }
 
-function toMain(){
-  router.push("/main")
+function toMain() {
+  router.push("/main");
 }
 </script>
 

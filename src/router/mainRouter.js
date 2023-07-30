@@ -5,7 +5,7 @@ import usersTable from "@/views/tables/usersTable.vue";
 import layout from "@/components/layout.vue";
 
 const routes = [
-  { path: "/", component: Test },
+  { path: "/", redirect: '/login1' },
   { path: "/login1", component: login1 },
   {
     path: "/main",
