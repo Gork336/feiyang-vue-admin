@@ -1,43 +1,29 @@
 # feiyang-weixiu-admin
 
-## 登陆页面-login1
+## 请求API
 
-包含请求：POST  /login
+### POST  /login
   
-发送数据格式：{"username":"1","password":"2","token":"10000000-aaaa-bbbb-cccc-000000000001"}
+发送数据格式：
 
-```javascript
-axios
-      .post("/login", loginForm)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+```json
+{
+  "username":"1",   
+  "password":"2",   
+  "token":"10000000-aaaa-bbbb-cccc-000000000001"
+}
 ```
 
-## Project Setup
+返回数据格式：
 
-```sh
-npm install
+```json
+{
+  "captchaValid":"true",
+  "accountValid":"true",
+  "token":"  "
+}
 ```
 
-### Compile and Hot-Reload for Development
+### POST  /getUsers
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-## 直接运行
-
-```sh
-cd dist
-python -m http.server
-```
+### POST /getTechnicians

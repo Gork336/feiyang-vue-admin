@@ -45,7 +45,7 @@ const toggleCollapse = () => {
         <template #title v-if="!collapse">用户列表</template>
       </el-menu-item></RouterLink
     >
-    <RouterLink to="/main" class="router-a"
+    <RouterLink to="/main/technicians" class="router-a"
       ><el-menu-item index="4">
         <font-awesome-icon
           icon="fa-solid fa-users-gear"
@@ -66,13 +66,23 @@ const toggleCollapse = () => {
       </el-menu-item></RouterLink
     >
     <RouterLink to="/login1" class="router-a"
-      ><el-menu-item index="6">
+      ><el-menu-item index="7">
         <font-awesome-icon
           icon="fa-solid fa-user-secret"
           size="lg"
           class="icon"
         />
         <template #title v-if="!collapse">退出登录</template>
+      </el-menu-item></RouterLink
+    >
+    <RouterLink to="/test" class="router-a"
+      ><el-menu-item index="7">
+        <font-awesome-icon
+          icon="fa-solid fa-user-secret"
+          size="lg"
+          class="icon"
+        />
+        <template #title v-if="!collapse">test</template>
       </el-menu-item></RouterLink
     >
   </el-menu>
