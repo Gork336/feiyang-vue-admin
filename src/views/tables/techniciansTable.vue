@@ -11,10 +11,14 @@ const techniciansData = ref([]);
 //techniciansData.value = staticTechbiciansData; //测试临时数据
 console.log(techniciansData);
 onMounted(() => {
-  axios.post("/getTechnicians").then(function (response) {
-    techniciansData.value = response.data;
-    console.log(response);
-  });
+  axios
+    .post("/getTechnicians")
+    .then(function (response) {
+      techniciansData.value = response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
 
 const { total, pageSize, currentPage, currentPageData } =
@@ -39,9 +43,15 @@ function handleAdd() {
 //addDialogSubmit
 function addDialogSubmit() {
   dialogAddVisible.value = false;
-  axios.post("/addTechnician", technicianForm).catch((e) => {
-    console.log(e);
-  });
+  console.log(technicianForm);
+  axios
+    .post("/addTechnician", technicianForm)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 }
 
 //Detail
@@ -57,23 +67,33 @@ function handleEdit(scope) {
 //EditDialogConfirm
 function EditDialogConfirm() {
   dialogEditVisible.value = false;
-  axios.post("/updateTechnician", technicianForm).catch((e) => {
-    console.log(e);
-  });
+  axios
+    .post("/updateTechnician", technicianForm)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 }
 //Delete
 const dialogDeleteVisible = ref(false);
-var willDeleteId = "";
+var willDeleteId = { technician_id: "" };
 function handleDelete(scope) {
   dialogDeleteVisible.value = true;
-  willDeleteId = scope.row.technician_id;
+  willDeleteId.technician_id = scope.row.technician_id;
 }
 //DeleteDialogConfirm
 function DeleteDialogConfirm() {
   dialogDeleteVisible.value = false;
-  axios.post("/deleteTechnician", willDeleteId).catch((e) => {
-    console.log(e);
-  });
+  axios
+    .post("/deleteTechnician", willDeleteId)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 }
 </script>
 <template>

@@ -5,7 +5,6 @@ import headerMenu from "./header.vue";
 
 import { useAsideWidthStore } from "@/stores/asidewidth";
 const asideWidth = useAsideWidthStore();
-console.log("aside初始" + asideWidth.width);
 watch(
   () => asideWidth.width,
   (newWidth) => {
