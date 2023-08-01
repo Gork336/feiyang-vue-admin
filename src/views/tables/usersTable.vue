@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
+import { usePagination } from "@/components/usePagination";
 import axios from "axios";
 
 // 用于存储从后端获取的数据
@@ -16,37 +17,8 @@ onMounted(() => {
     });
 });
 
-//total
-const total = computed(() => {
-  console.log(usersData.value.length);
-  return usersData.value.length;
-});
-
-//page-size
-const pageSize = ref(10); //每页多少条
-watch(
-  () => pageSize.value,
-  (newSize) => {
-    pageSize.value = newSize;
-    console.log("newSize: " + newSize);
-  }
-);
-//current-page
-const currentPage = ref(1); //当前页
-watch(
-  () => currentPage.value,
-  (newPage) => {
-    currentPage.value = newPage;
-    console.log("newPage: " + newPage);
-  }
-);
-
-//当前分页数据
-const currentPageData = computed(() => {
-  const start = (currentPage.value - 1) * pageSize.value;
-  const end = start + pageSize.value;
-  return usersData.value.slice(start, end);
-});
+const { total, pageSize, currentPage, currentPageData } =
+  usePagination(usersData);
 </script>
 <template>
   <el-table :data="currentPageData" style="width: 100%">

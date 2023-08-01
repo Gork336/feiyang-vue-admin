@@ -27,3 +27,37 @@
 ### POST  /getUsers
 
 ### POST /getTechnicians
+
+### POST /addTechnician
+
+发送数据格式：
+
+```json
+{
+  "technician_id": "",
+  "realname": "",
+  "nickname": "",
+  "phone_no": "",
+  "qq_no": ""
+}
+```
+
+### POST /deleteTechnician
+
+发送数据格式: 字符串
+
+### POST /updateTechnician
+
+发送数据格式：
+
+```json
+{
+  "technician_id": "",
+  "realname": "",
+  "nickname": "",
+  "phone_no": "",
+  "qq_no": ""
+}
+```
+
+其中 `technician_id` 和 `realname` 不会改变，与数据库中相同

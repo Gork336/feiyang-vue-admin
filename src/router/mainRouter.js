@@ -3,7 +3,7 @@ import login1 from "@/views/login/login-1.vue";
 import Test from "@/views/Test.vue";
 import usersTable from "@/views/tables/usersTable.vue";
 import techniciansTable from "@/views/tables/techniciansTable.vue"
-import layout from "@/components/layout.vue";
+import layout from "@/components/layout/layout.vue";
 
 import { useLoginStatusStore } from "@/stores/loginStatus";
 

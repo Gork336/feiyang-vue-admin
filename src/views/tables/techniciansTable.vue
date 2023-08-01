@@ -1,6 +1,8 @@
 <script setup>
 import { computed, onMounted, ref, watch, reactive } from "vue";
 import axios from "axios";
+import { usePagination } from "@/components/usePagination.js"; //分页
+
 //临时数据
 import staticTechbiciansData from "@/staticJson/staticTechniciansData.json";
 
@@ -15,70 +17,74 @@ techniciansData.value = staticTechbiciansData; //测试临时数据
 //   });
 // });
 
-//total
-const total = computed(() => {
-  return techniciansData.value.length;
-});
-//修改
+const { total, pageSize, currentPage, currentPageData } =
+  usePagination(techniciansData);
 
-//page-size
-const pageSize = ref(10);
-watch(
-  () => pageSize.value,
-  (newSize) => {
-    pageSize.value = newSize;
-  }
-);
-
-//current-page
-const currentPage = ref(1);
-watch(
-  () => currentPage.value,
-  (newPage) => {
-    currentPage.value = newPage;
-  }
-);
-//当前分页数据
-const currentPageData = computed(() => {
-  const start = (currentPage.value - 1) * pageSize.value;
-  const end = start + pageSize.value;
-  return techniciansData.value.slice(start, end);
-});
-//detail
-function handleDetail(scope) {
-  console.log(JSON.stringify(scope.row));
-}
-//Edit
-const dialogFormVisible = ref(false);
-function handleEdit(scope) {
-  dialogFormVisible.value = true;
-  console.log(scope);
-  dialogForm.technician_id = scope.row.technician_id;
-  dialogForm.realname = scope.row.realname;
-}
-//handleEditDialogConfirm
-const dialogForm = reactive({
+//technicianForm
+const technicianForm = reactive({
   technician_id: "",
   realname: "",
+  nickname: "",
+  phone_no: "",
+  qq_no: "",
 });
-function handleEditDialogConfirm() {
-  dialogFormVisible.value = false;
+//Add
+const dialogAddVisible = ref(false);
+function handleAdd() {
+  dialogAddVisible.value = true;
+  Object.keys(technicianForm).forEach((key) => {
+    technicianForm[key] = "";
+  });
+}
+//addDialogSubmit
+function addDialogSubmit() {
+  dialogAddVisible.value = false;
+  axios.post("/addTechnician", technicianForm).catch((e) => {
+    console.log(e);
+  });
+}
+
+//Detail
+function handleDetail(scope) {}
+//Edit
+const dialogEditVisible = ref(false);
+function handleEdit(scope) {
+  Object.keys(technicianForm).forEach((key) => {
+    technicianForm[key] = scope.row[key];
+  });
+  dialogEditVisible.value = true;
+}
+//EditDialogConfirm
+function EditDialogConfirm() {
+  dialogEditVisible.value = false;
+  axios.post("/updateTechnician", technicianForm).catch((e) => {
+    console.log(e);
+  });
 }
 //Delete
 const dialogDeleteVisible = ref(false);
-var willDelete = "";
+var willDeleteId = "";
 function handleDelete(scope) {
-  dialogDeleteVisible.value= true;
-  willDelete = scope.row;
-  console.log(willDelete);
+  dialogDeleteVisible.value = true;
+  willDeleteId = scope.row.technician_id;
 }
-//handleDeleteDialogConfirm
-function handleDeleteDialogConfirm() {
+//DeleteDialogConfirm
+function DeleteDialogConfirm() {
   dialogDeleteVisible.value = false;
-  axios.post("/deleteTechnician", willDelete);
+  axios.post("/deleteTechnician", willDeleteId).catch((e) => {
+    console.log(e);
+  });
 }
 </script>
 <template>
+  <span
+    ><el-button type="primary" @click="handleAdd"
+      ><font-awesome-icon
+        icon="fa-solid fa-plus"
+        class="icon"
+      />添加新技术员</el-button
+    ></span
+  >
   <el-table :data="currentPageData" style="width: 100%">
     <el-table-column prop="technician_id" label="技术员编号" />
     <el-table-column prop="realname" label="真实姓名" />
@@ -88,10 +94,10 @@ function handleDeleteDialogConfirm() {
     <el-table-column fixed="right" label="操作">
       <template #default="scope">
         <el-button link type="primary" size="small" @click="handleDetail(scope)"
-          >Detail</el-button
+          >查看详细</el-button
         >
         <el-button link type="primary" size="small" @click="handleEdit(scope)"
-          >Edit</el-button
+          >编辑</el-button
         >
         <el-button link type="primary" size="small" @click="handleDelete(scope)"
           >删除</el-button
@@ -105,37 +111,76 @@ function handleDeleteDialogConfirm() {
     v-model:page-size="pageSize"
     v-model:current-page="currentPage"
   />
-
-  <el-dialog v-model="dialogFormVisible" title="修改信息" width="50%">
-    <p>123</p>
-    <el-form :model="dialogForm">
+  <!-- Add -->
+  <el-dialog v-model="dialogAddVisible" title="添加新技术员" width="50%">
+    <el-form :model="technicianForm" label-width="120px" label-position="left">
       <el-form-item label="技术员编号">
-        <el-input v-model="dialogForm.technician_id" disabled />
+        <el-input v-model="technicianForm.technician_id" />
       </el-form-item>
-      <el-form-item label="技术员姓名">
-        <el-input v-model="dialogForm.realname" disabled />
+      <el-form-item label="真实姓名">
+        <el-input v-model="technicianForm.realname" />
+      </el-form-item>
+      <el-form-item label="昵称">
+        <el-input v-model="technicianForm.nickname" />
+      </el-form-item>
+      <el-form-item label="电话号码">
+        <el-input v-model="technicianForm.phone_no" />
+      </el-form-item>
+      <el-form-item label="QQ号码">
+        <el-input v-model="technicianForm.qq_no" />
       </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="handleEditDialogConfirm">
-          确认
-        </el-button>
+        <el-button @click="dialogAddVisible = false">取消</el-button>
+        <el-button type="primary" @click="addDialogSubmit"> 提交 </el-button>
       </span>
     </template>
   </el-dialog>
+  <!-- Detail -->
 
+  <!-- Edit -->
+  <el-dialog v-model="dialogEditVisible" title="修改信息" width="50%">
+    <p>123</p>
+    <el-form :model="technicianForm">
+      <el-form-item label="技术员编号">
+        <el-input v-model="technicianForm.technician_id" disabled />
+      </el-form-item>
+      <el-form-item label="技术员姓名">
+        <el-input v-model="technicianForm.realname" disabled />
+      </el-form-item>
+      <el-form-item label="昵称">
+        <el-input v-model="technicianForm.nickname" />
+      </el-form-item>
+      <el-form-item label="电话号码">
+        <el-input v-model="technicianForm.phone_no" />
+      </el-form-item>
+      <el-form-item label="QQ号码">
+        <el-input v-model="technicianForm.qq_no"
+      /></el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogEditVisible = false">取消</el-button>
+        <el-button type="primary" @click="EditDialogConfirm"> 确认 </el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <!-- Delete -->
   <el-dialog v-model="dialogDeleteVisible" title="Tips" width="30%">
     <span>确定要删除该技术员信息吗？</span>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogDeleteVisible = false">取消</el-button>
-        <el-button type="primary" @click="handleDeleteDialogConfirm">
+        <el-button type="primary" @click="DeleteDialogConfirm">
           确认
         </el-button>
       </span>
     </template>
   </el-dialog>
 </template>
-<style scoped></style>
+<style scoped>
+.icon {
+  padding-right: 12px;
+}
+</style>
