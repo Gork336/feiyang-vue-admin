@@ -30,10 +30,12 @@ const toggleCollapse = () => {
 
       <template #title v-if="!collapse"></template>
     </el-menu-item>
-    <el-menu-item index="1">
-      <font-awesome-icon icon="fa-solid fa-user-secret" class="icon" />
-      <template #title v-if="!collapse">Navigator One</template>
-    </el-menu-item>
+    <RouterLink to="/main/" class="router-a">
+      <el-menu-item index="1">
+        <font-awesome-icon icon="fa-solid fa-house" size="lg" class="icon" />
+        <template #title v-if="!collapse">首页</template>
+      </el-menu-item>
+    </RouterLink>
     <el-menu-item index="2">
       <font-awesome-icon icon="fa-solid fa-user-secret" class="icon" />
       <template #title v-if="!collapse">Navigator Two</template>
@@ -55,16 +57,17 @@ const toggleCollapse = () => {
         <template #title v-if="!collapse">技术员列表</template>
       </el-menu-item></RouterLink
     >
-    <RouterLink to="/main" class="router-a"
+    <RouterLink to="/main/orders" class="router-a"
       ><el-menu-item index="6">
         <font-awesome-icon
-          icon="fa-solid fa-user-secret"
+          icon="fa-solid fa-file-lines"
           size="lg"
           class="icon"
         />
-        <template #title v-if="!collapse">/main</template>
+        <template #title v-if="!collapse">维修订单列表</template>
       </el-menu-item></RouterLink
     >
+
     <RouterLink to="/login1" class="router-a"
       ><el-menu-item index="7">
         <font-awesome-icon

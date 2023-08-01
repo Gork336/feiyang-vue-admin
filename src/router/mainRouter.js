@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import layout from "@/components/layout/layout.vue";
 import login1 from "@/views/login/login-1.vue";
 import Test from "@/views/Test.vue";
+
 import usersTable from "@/views/tables/usersTable.vue";
-import techniciansTable from "@/views/tables/techniciansTable.vue"
-import layout from "@/components/layout/layout.vue";
+import techniciansTable from "@/views/tables/techniciansTable.vue";
+import ordersTable from "@/views/tables/ordersTable.vue";
+import showData from "@/views/show/showData.vue";
 
 import { useLoginStatusStore } from "@/stores/loginStatus";
 
@@ -16,6 +19,7 @@ const routes = [
     children: [
       {
         path: "",
+        component: showData,
       },
       {
         path: "users",
@@ -24,6 +28,10 @@ const routes = [
       {
         path: "technicians",
         component: techniciansTable,
+      },
+      {
+        path: "orders",
+        component: ordersTable,
       },
     ],
   },

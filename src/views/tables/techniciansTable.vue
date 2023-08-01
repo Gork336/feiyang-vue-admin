@@ -4,18 +4,18 @@ import axios from "axios";
 import { usePagination } from "@/components/usePagination.js"; //分页
 
 //临时数据
-import staticTechbiciansData from "@/staticJson/staticTechniciansData.json";
+//import staticTechbiciansData from "@/staticJson/staticTechniciansData.json";
 
 //总数据
 const techniciansData = ref([]);
-techniciansData.value = staticTechbiciansData; //测试临时数据
-//console.log(techniciansData);
-// onMounted(() => {
-//   axios.post("/getTechnicians").then(function (response) {
-//     techniciansData.value = response.data;
-//     console.log(response);
-//   });
-// });
+//techniciansData.value = staticTechbiciansData; //测试临时数据
+console.log(techniciansData);
+onMounted(() => {
+  axios.post("/getTechnicians").then(function (response) {
+    techniciansData.value = response.data;
+    console.log(response);
+  });
+});
 
 const { total, pageSize, currentPage, currentPageData } =
   usePagination(techniciansData);

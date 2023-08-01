@@ -23,6 +23,9 @@ export default defineConfig({
           if (id.includes("element-plus")) {
             return "element-plus";
           }
+          if (id.includes("echarts")) {
+            return "echarts";
+          }
         },
       },
     },
