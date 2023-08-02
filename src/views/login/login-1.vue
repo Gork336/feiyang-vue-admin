@@ -80,7 +80,7 @@ function toMain() {
       </el-form-item>
 
       <el-form-item label="密码">
-        <el-input v-model="loginForm.password" />
+        <el-input v-model="loginForm.password" type="password" show-password />
       </el-form-item>
 
       <vue-hcaptcha :sitekey="sitekey" @verify="captchaVerify"></vue-hcaptcha>

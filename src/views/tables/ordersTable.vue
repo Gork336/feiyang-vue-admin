@@ -3,9 +3,10 @@ import { computed, onMounted, ref, watch } from "vue";
 import { usePagination } from "@/components/usePagination";
 import axios from "axios";
 
+//import staticOrderData from "@/staticJson/staticOrderData.json";
 // 用于存储从后端获取的数据
 const ordersData = ref([]);
-
+//ordersData.value = staticOrderData;
 onMounted(() => {
   axios
     .post("/getOrders")
@@ -17,11 +18,42 @@ onMounted(() => {
       console.log(error);
     });
 });
+//搜索功能
+const searchTechnicianId = ref("");
+const searchUserId = ref("");
+const filterData = computed(() =>
+  ordersData.value.filter((data) => {
+    // 过滤用户名
+    const isTechnicianIdMatched =
+      !searchTechnicianId.value ||
+      data.technician_id.toString().includes(searchTechnicianId.value);
 
+    // 过滤用户ID
+    const isUserIdMatched =
+      !searchUserId.value ||
+      data.user_id.toString().includes(searchUserId.value);
+
+    // 返回符合两个搜索条件的数据
+    return isTechnicianIdMatched && isUserIdMatched;
+  })
+);
 const { total, pageSize, currentPage, currentPageData } =
-  usePagination(ordersData);
+  usePagination(filterData);
 </script>
 <template>
+  <!-- 搜索 -->
+  <el-form :inline="true">
+    <el-form-item label="搜索技术员编号"
+      ><el-input
+        v-model="searchTechnicianId"
+        placeholder="search"
+        class="input"
+    /></el-form-item>
+    <el-form-item label="搜索用户编号"
+      ><el-input v-model="searchUserId" placeholder="search" class="input"
+    /></el-form-item>
+  </el-form>
+  <!-- 表格 -->
   <el-table :data="currentPageData" style="width: 100%">
     <el-table-column prop="order_id" label="订单编号"></el-table-column>
     <el-table-column prop="user_id" label="用户编号"></el-table-column>
@@ -40,4 +72,3 @@ const { total, pageSize, currentPage, currentPageData } =
   </div>
 </template>
 <style scoped></style>
-F

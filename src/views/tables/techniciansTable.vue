@@ -9,8 +9,9 @@ import { usePagination } from "@/components/usePagination.js"; //分页
 //总数据
 const techniciansData = ref([]);
 //techniciansData.value = staticTechbiciansData; //测试临时数据
-console.log(techniciansData);
-onMounted(() => {
+//console.log(techniciansData);
+
+function requestData() {
   axios
     .post("/getTechnicians")
     .then(function (response) {
@@ -19,10 +20,29 @@ onMounted(() => {
     .catch(function (error) {
       console.log(error);
     });
-});
+}
+onMounted(requestData);
+//搜索功能
+const searchRealname = ref("");
+const searchTechnicianId = ref("");
+const filterData = computed(() =>
+  techniciansData.value.filter((data) => {
+    // 过滤用户名
+    const isRealnameMatched =
+      !searchRealname.value ||
+      data.realname.toLowerCase().includes(searchRealname.value.toLowerCase());
 
+    // 过滤用户ID
+    const isTechnicianIdMatched =
+      !searchTechnicianId.value ||
+      data.technician_id.toString().includes(searchTechnicianId.value);
+
+    // 返回符合两个搜索条件的数据
+    return isRealnameMatched && isTechnicianIdMatched;
+  })
+);
 const { total, pageSize, currentPage, currentPageData } =
-  usePagination(techniciansData);
+  usePagination(filterData);
 
 //technicianForm
 const technicianForm = reactive({
@@ -52,6 +72,7 @@ function addDialogSubmit() {
     .catch((e) => {
       console.log(e);
     });
+  requestData();
 }
 
 //Detail
@@ -75,6 +96,7 @@ function EditDialogConfirm() {
     .catch((e) => {
       console.log(e);
     });
+  requestData();
 }
 //Delete
 const dialogDeleteVisible = ref(false);
@@ -94,17 +116,39 @@ function DeleteDialogConfirm() {
     .catch((e) => {
       console.log(e);
     });
+  requestData();
 }
 </script>
 <template>
-  <span
-    ><el-button type="primary" @click="handleAdd"
-      ><font-awesome-icon
-        icon="fa-solid fa-plus"
-        class="icon"
-      />添加新技术员</el-button
-    ></span
-  >
+  <!-- info -->
+  <el-alert
+    title="真实姓名和技术员编号都是模糊搜索"
+    type="info"
+    show-icon
+    class="info"
+  />
+  <!-- 搜索 -->
+  <el-form :inline="true">
+    <el-form-item label="搜索真实姓名"
+      ><el-input v-model="searchRealname" placeholder="search" class="input"
+    /></el-form-item>
+    <el-form-item label="搜索技术员编号"
+      ><el-input
+        v-model="searchTechnicianId"
+        placeholder="search"
+        class="input"
+    /></el-form-item>
+    <el-form-item
+      ><el-button type="primary" @click="handleAdd"
+        ><font-awesome-icon
+          icon="fa-solid fa-plus"
+          class="icon"
+        />添加新技术员</el-button
+      ></el-form-item
+    >
+  </el-form>
+  <!-- Add -->
+
   <el-table :data="currentPageData" style="width: 100%">
     <el-table-column prop="technician_id" label="技术员编号" />
     <el-table-column prop="realname" label="真实姓名" />
@@ -202,5 +246,8 @@ function DeleteDialogConfirm() {
 <style scoped>
 .icon {
   padding-right: 12px;
+}
+.info {
+  margin-bottom: 15px;
 }
 </style>

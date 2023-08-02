@@ -41,13 +41,20 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+const openMessage = () => {
+  ElMessage({
+    showClose: true,
+    message: '请先登录！',
+    type: 'warning',
+  })
+}
 // router.beforeEach(async (to, from) => {
 //   const loginStatus = useLoginStatusStore();
 //   console.log(loginStatus.isAuthenticated + "+" + to.name);
 //   console.log(loginStatus.isAuthenticated && to.name !== "LoginPage")
 //   if (!loginStatus.isAuthenticated && to.name !== "LoginPage") {
 //     // 将用户重定向到登录页面
-//     alert("请登录！")
+//     openMessage()
 //     return { name: "LoginPage" };
 //   }
 // });
