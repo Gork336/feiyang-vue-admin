@@ -70,3 +70,9 @@
 ### POST /getOrders
 
 ***
+
+### POST /getTotal
+
+### POST /getCampusOrder
+
+### POST /getWeeklyOrder

@@ -37,8 +37,8 @@ const toggleCollapse = () => {
       </el-menu-item>
     </RouterLink>
     <el-menu-item index="2">
-      <font-awesome-icon icon="fa-solid fa-user-secret" class="icon" />
-      <template #title v-if="!collapse">Navigator Two</template>
+      <font-awesome-icon icon="fa-solid fa-gauge" size="lg" class="icon" />
+      <template #title v-if="!collapse">小程序管理</template>
     </el-menu-item>
 
     <RouterLink to="/main/users" class="router-a"
