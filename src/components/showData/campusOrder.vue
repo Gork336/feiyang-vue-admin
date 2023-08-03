@@ -66,7 +66,7 @@ onMounted(() => {
 </template>
 <style>
 #main1 {
-  width: 580px;
+  
   height: 400px;
 }
 </style>

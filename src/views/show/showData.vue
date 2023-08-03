@@ -1,13 +1,24 @@
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import axios from "axios";
 import campusOrder from "../../components/showData/campusOrder.vue";
 import weeklyOrder from "../../components/showData/weeklyOrder.vue";
+import numberCount from "../../components/showData/numberCount.vue";
+
+const totalNum = reactive({
+  totalUsers: 0,
+  totalTechnicians: 0,
+  totalOrders: 0,
+});
 
 onMounted(() => {
   axios
     .post("/getTotal")
-    .then((response) => {})
+    .then((response) => {
+      totalNum.totalUsers = response.data.totalUsers;
+      totalNum.totalTechnicians = response.data.totalTechnicians;
+      totalNum.totalOrders = response.data.totalOrders;
+    })
     .catch((e) => {
       console.log(e);
     });
@@ -25,7 +36,7 @@ onMounted(() => {
           />用户总数
         </h4>
         <br />
-        <h1 class="card-value">12346</h1>
+        <numberCount :target-number="totalNum.totalUsers"></numberCount>
       </el-card>
     </el-col>
     <el-col :span="6">
@@ -38,7 +49,7 @@ onMounted(() => {
           />技术员总数
         </h4>
         <br />
-        <h1 class="card-value">12346</h1>
+        <numberCount :target-number="totalNum.totalTechnicians"></numberCount>
       </el-card>
     </el-col>
     <el-col :span="6">
@@ -51,7 +62,7 @@ onMounted(() => {
           />维修订单总数
         </h4>
         <br />
-        <h1 class="card-value">12346</h1>
+        <numberCount :target-number="totalNum.totalOrders"></numberCount>
       </el-card>
     </el-col>
     <el-col :span="6">
@@ -69,18 +80,17 @@ onMounted(() => {
     </el-col>
   </el-row>
   <el-divider />
-  <div class="chart-container">
-    <campusOrder></campusOrder>
-    <weeklyOrder></weeklyOrder>
-  </div>
-  <weeklyOrder></weeklyOrder>
+
+  <el-row :gutter="12">
+    <el-col :span="12"
+      ><el-card shadow="always"><campusOrder></campusOrder></el-card>
+    </el-col>
+    <el-col :span="12"
+      ><el-card shadow="always"><weeklyOrder></weeklyOrder></el-card
+    ></el-col>
+  </el-row>
 </template>
 <style scoped>
-.chart-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .icon {
   margin-right: 15px;
 }
@@ -90,8 +100,5 @@ h1 {
 }
 h4 {
   margin: 5px 5px;
-}
-.card-value {
-  margin-bottom: 5px;
 }
 </style>

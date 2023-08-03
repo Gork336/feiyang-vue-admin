@@ -72,7 +72,12 @@ function toMain() {
 
 <template>
   <div class="login-container">
-    <el-form class="login-form" :model="loginForm">
+    <el-form
+      class="login-form"
+      :model="loginForm"
+      label-width="auto"
+      label-position="left"
+    >
       <h1 class="login-title">Welcome to Fei Yang</h1>
 
       <el-form-item label="用户名">
@@ -82,8 +87,9 @@ function toMain() {
       <el-form-item label="密码">
         <el-input v-model="loginForm.password" type="password" show-password />
       </el-form-item>
-
-      <vue-hcaptcha :sitekey="sitekey" @verify="captchaVerify"></vue-hcaptcha>
+      <el-form-item
+        ><vue-hcaptcha :sitekey="sitekey" @verify="captchaVerify"></vue-hcaptcha
+      ></el-form-item>
 
       <el-form-item>
         <el-button type="primary" @click="loginSubmit">登录</el-button>
@@ -124,5 +130,6 @@ function toMain() {
 }
 .warning {
   color: #e6a23c;
+  text-align: center;
 }
 </style>
