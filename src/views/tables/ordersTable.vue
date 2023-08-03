@@ -41,6 +41,14 @@ const { total, pageSize, currentPage, currentPageData } =
   usePagination(filterData);
 </script>
 <template>
+  <!-- 提示 -->
+  <el-alert
+    title="订单状态：0->待分配，1->维修中，2->已完成；校区是拼音首字母"
+    type="info"
+    show-icon
+    class="info"
+  />
+
   <!-- 搜索 -->
   <el-form :inline="true">
     <el-form-item label="搜索技术员编号"
@@ -61,6 +69,7 @@ const { total, pageSize, currentPage, currentPageData } =
     <el-table-column prop="created_at" label="创建时间"></el-table-column>
     <el-table-column prop="completed_at" label="完成时间"></el-table-column>
     <el-table-column prop="status" label="订单状态"></el-table-column>
+    <el-table-column prop="campus" label="校区"></el-table-column>
   </el-table>
   <div class="pagination-block">
     <el-pagination
@@ -71,4 +80,8 @@ const { total, pageSize, currentPage, currentPageData } =
     />
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.info {
+  margin-bottom: 15px;
+}
+</style>

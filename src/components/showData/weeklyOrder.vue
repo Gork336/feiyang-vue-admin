@@ -19,7 +19,7 @@ echarts.use([
 ]);
 onMounted(() => {
   axios
-    .post("/getWeeklyOrder")
+    .post("/getWeeklyOrders")
     .then((response) => {
       console.log(response);
     })

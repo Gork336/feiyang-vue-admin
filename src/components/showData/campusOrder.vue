@@ -16,7 +16,7 @@ echarts.use([
 ]);
 onMounted(() => {
   axios
-    .post("/getCampusOrder")
+    .post("/getCampusOrders")
     .then((response) => {
       console.log(response);
     })

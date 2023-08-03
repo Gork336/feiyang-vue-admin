@@ -15,6 +15,10 @@ onMounted(() => {
   axios
     .post("/getTotal")
     .then((response) => {
+      console.log(response);
+      console.log(response.data);
+      console.log(response.data.totalUsers);
+      console.log(totalNum.totalUsers)
       totalNum.totalUsers = response.data.totalUsers;
       totalNum.totalTechnicians = response.data.totalTechnicians;
       totalNum.totalOrders = response.data.totalOrders;
