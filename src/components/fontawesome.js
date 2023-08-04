@@ -15,7 +15,8 @@ import {
   faPlus,
   faFileLines,
   faHouse,
-  faGauge
+  faGauge,
+  faGear
 } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
@@ -31,7 +32,8 @@ library.add(
   faPlus,
   faFileLines,
   faHouse,
-  faGauge
+  faGauge,
+  faGear
 );
 
 export { FontAwesomeIcon };
