@@ -52,7 +52,7 @@ const { total, pageSize, currentPage, currentPageData } =
     class="info"
   />
   <!-- 搜索 -->
-  <el-form :inline="true">
+  <el-form :inline="true" label-width="auto" label-position="left">
     <el-form-item label="搜索用户名"
       ><el-input v-model="searchUsername" placeholder="search" class="input"
     /></el-form-item>

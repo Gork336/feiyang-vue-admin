@@ -1,5 +1,6 @@
 <script setup>
-import { defineProps, reactive, watch } from "vue";
+import { reactive, watch } from "vue";
+
 import gsap from "gsap";
 const props = defineProps(["targetNumber"]);
 const tweened = reactive({

@@ -128,7 +128,7 @@ function DeleteDialogConfirm() {
     class="info"
   />
   <!-- 搜索 -->
-  <el-form :inline="true">
+  <el-form :inline="true" label-width="auto" label-position="left">
     <el-form-item label="搜索真实姓名"
       ><el-input v-model="searchRealname" placeholder="search" class="input"
     /></el-form-item>

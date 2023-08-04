@@ -1,12 +1,25 @@
 <script setup>
-import { ref } from "vue";
-import numberCount from "../components/showData/numberCount.vue";
-const input=ref(123)
+import { useDark, useToggle, useColorMode } from "@vueuse/core";
+
+const isDark = useDark();
+const colorMode = useColorMode({
+  modes:{
+    dim:'dim',
+    cafe:'cafe',
+  }
+});
+const toggleDark = useToggle(isDark);
 </script>
 <template>
-  This is test!
-  <br />
-  <numberCount :target-number='input' ></numberCount>
-  <input type="text" v-model="input" >
+  {{ colorMode }}
+  <button @click="colorMode = 'dark'">Dark</button>
+  <button @click="colorMode = 'light'">Light</button>
+  <button @click="colorMode = 'dim'">Dim</button>
+  <button @click="colorMode = 'cafe'">cafe </button>
 </template>
-<style scoped></style>
+<style>
+.dark {
+  background: #252525;
+  color: white;
+}
+</style>
