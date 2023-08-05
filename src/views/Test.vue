@@ -3,10 +3,10 @@ import { useDark, useToggle, useColorMode } from "@vueuse/core";
 
 const isDark = useDark();
 const colorMode = useColorMode({
-  modes:{
-    dim:'dim',
-    cafe:'cafe',
-  }
+  modes: {
+    dim: "dim",
+    cafe: "cafe",
+  },
 });
 const toggleDark = useToggle(isDark);
 </script>
@@ -15,11 +15,6 @@ const toggleDark = useToggle(isDark);
   <button @click="colorMode = 'dark'">Dark</button>
   <button @click="colorMode = 'light'">Light</button>
   <button @click="colorMode = 'dim'">Dim</button>
-  <button @click="colorMode = 'cafe'">cafe </button>
+  <button @click="colorMode = 'cafe'">cafe</button>
 </template>
-<style>
-.dark {
-  background: #252525;
-  color: white;
-}
-</style>
+<style></style>
