@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { createRouter, createWebHistory } from "vue-router";
 import layout from "@/components/layout/layout.vue";
 import login1 from "@/views/login/login-1.vue";

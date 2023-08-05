@@ -1,3 +1,6 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<!-- eslint-disable vue/no-setup-props-destructure -->
+
 <script setup>
 import { ref, watchEffect, watch } from "vue";
 import { useDark, useToggle } from "@vueuse/core";

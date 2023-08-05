@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { defineStore } from "pinia";
 export const useAsideWidthStore = defineStore("asideWidth", () => {
   const width = ref("240px");

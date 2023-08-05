@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive } from "vue";
 import axios from "axios";
 import campusOrder from "../../components/showData/campusOrder.vue";
 import weeklyOrder from "../../components/showData/weeklyOrder.vue";
