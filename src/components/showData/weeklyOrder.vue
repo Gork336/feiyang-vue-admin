@@ -13,7 +13,6 @@ echarts.use([
   TooltipComponent,
   TitleComponent,
   GridComponent,
-
   BarChart,
   CanvasRenderer,
 ]);
@@ -60,7 +59,6 @@ onMounted(() => {
 </template>
 <style>
 #main2 {
-
   height: 400px;
 }
 </style>

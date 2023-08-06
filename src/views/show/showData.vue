@@ -15,10 +15,6 @@ onMounted(() => {
   axios
     .post("/getTotal")
     .then((response) => {
-      console.log(response);
-      console.log(response.data);
-      console.log(response.data.totalUsers);
-      console.log(totalNum.totalUsers)
       totalNum.totalUsers = response.data.totalUsers;
       totalNum.totalTechnicians = response.data.totalTechnicians;
       totalNum.totalOrders = response.data.totalOrders;
@@ -85,14 +81,14 @@ onMounted(() => {
   </el-row>
   <el-divider />
 
-  <el-row :gutter="12">
+  <!-- <el-row :gutter="12">
     <el-col :span="12"
       ><el-card shadow="always"><campusOrder></campusOrder></el-card>
     </el-col>
     <el-col :span="12"
       ><el-card shadow="always"><weeklyOrder></weeklyOrder></el-card
     ></el-col>
-  </el-row>
+  </el-row> -->
 </template>
 <style scoped>
 .icon {
