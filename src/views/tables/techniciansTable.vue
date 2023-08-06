@@ -76,6 +76,7 @@ function addDialogSubmit() {
 }
 
 //Detail
+// eslint-disable-next-line no-unused-vars
 function handleDetail(scope) {}
 //Edit
 const dialogEditVisible = ref(false);
