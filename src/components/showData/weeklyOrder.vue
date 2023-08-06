@@ -21,37 +21,49 @@ onMounted(() => {
     .post("/getWeeklyOrders")
     .then((response) => {
       console.log(response);
+
+      // 创建日期数组和订单数量数组
+      const dates = [];
+      const orderCounts = [];
+
+      // 提取日期和订单数量数据
+      response.data.forEach((item) => {
+        dates.push(item.day);
+        orderCounts.push(item.order_count);
+      });
+
+      //画图
+      var chartDom = document.getElementById("main2");
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      option = {
+        title: {
+          text: "近七日每天维修订单数量",
+          left: "center",
+          top: "30",
+        },
+        tooltip: {},
+        xAxis: {
+          type: "category",
+          data: dates,
+        },
+        yAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            data: orderCounts,
+            type: "bar",
+          },
+        ],
+      };
+
+      option && myChart.setOption(option);
     })
     .catch((e) => {
       console.log(e);
     });
-  var chartDom = document.getElementById("main2");
-  var myChart = echarts.init(chartDom);
-  var option;
-
-  option = {
-    title: {
-      text: "近七日每天维修订单数量",
-      left: "center",
-      top: "30",
-    },
-    tooltip: {},
-    xAxis: {
-      type: "category",
-      data: ["7-11", "7-12", "7-13", "T7-14", "7-15", "Sat", "Sun"],
-    },
-    yAxis: {
-      type: "value",
-    },
-    series: [
-      {
-        data: [12, 20, 15, 8, 7, 11, 13],
-        type: "bar",
-      },
-    ],
-  };
-
-  option && myChart.setOption(option);
 });
 </script>
 <template>

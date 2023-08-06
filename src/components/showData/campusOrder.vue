@@ -15,53 +15,54 @@ echarts.use([
   CanvasRenderer,
   LabelLayout,
 ]);
+
 onMounted(() => {
   //获取数据
   axios
     .post("/getCampusOrders")
     .then((response) => {
       console.log(response);
+      //生成图表
+      var chartDom = document.getElementById("main1");
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      option = {
+        title: {
+          text: "各校区报修数量",
+          subtext: "（累计）",
+          left: "center",
+        },
+        tooltip: {
+          trigger: "item",
+        },
+
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: "50%",
+            data: [
+              { value: response.data.JA, name: "江安校区" },
+              { value: response.data.WJ, name: "望江校区" },
+              { value: response.data.HX, name: "华西校区" },
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+              },
+            },
+          },
+        ],
+      };
+
+      option && myChart.setOption(option);
     })
     .catch((e) => {
       console.log(e);
     });
-  //生成图表
-  var chartDom = document.getElementById("main1");
-  var myChart = echarts.init(chartDom);
-  var option;
-
-  option = {
-    title: {
-      text: "各校区报修数量",
-      subtext: "（累计）",
-      left: "center",
-    },
-    tooltip: {
-      trigger: "item",
-    },
-
-    series: [
-      {
-        name: "Access From",
-        type: "pie",
-        radius: "50%",
-        data: [
-          { value: 1048, name: "江安校区" },
-          { value: 735, name: "望江校区" },
-          { value: 580, name: "华西校区" },
-        ],
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-          },
-        },
-      },
-    ],
-  };
-
-  option && myChart.setOption(option);
 });
 </script>
 <template>

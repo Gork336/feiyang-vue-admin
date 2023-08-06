@@ -9,6 +9,8 @@ import techniciansTable from "@/views/tables/techniciansTable.vue";
 import ordersTable from "@/views/tables/ordersTable.vue";
 import showData from "@/views/show/showData.vue";
 
+import NotFound from "@/views/error/404.vue";
+
 import { useLoginStatusStore } from "@/stores/loginStatus";
 
 const routes = [
@@ -37,6 +39,14 @@ const routes = [
     ],
   },
   { path: "/test", component: Test },
+  {
+    path: "/404",
+    component: NotFound,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/404",
+  },
 ];
 const router = createRouter({
   history: createWebHistory(),
@@ -45,19 +55,20 @@ const router = createRouter({
 const openMessage = () => {
   ElMessage({
     showClose: true,
-    message: '请先登录！',
-    type: 'warning',
-  })
-}
-// router.beforeEach(async (to, from) => {
-//   const loginStatus = useLoginStatusStore();
-//   console.log(loginStatus.isAuthenticated + "+" + to.name);
-//   console.log(loginStatus.isAuthenticated && to.name !== "LoginPage")
-//   if (!loginStatus.isAuthenticated && to.name !== "LoginPage") {
-//     // 将用户重定向到登录页面
-//     openMessage()
-//     return { name: "LoginPage" };
-//   }
-// });
+    message: "请先登录！",
+    type: "warning",
+  });
+};
+// eslint-disable-next-line no-unused-vars
+router.beforeEach(async (to, from) => {
+  const loginStatus = useLoginStatusStore();
+  console.log(loginStatus.isAuthenticated + "+" + to.name);
+  console.log(loginStatus.isAuthenticated && to.name !== "LoginPage")
+  if (!loginStatus.isAuthenticated && to.name !== "LoginPage") {
+    // 将用户重定向到登录页面
+    openMessage()
+    return { name: "LoginPage" };
+  }
+});
 
 export default router;

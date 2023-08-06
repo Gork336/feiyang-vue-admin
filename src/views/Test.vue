@@ -1,21 +1,17 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<script setup>
-import { useDark, useToggle, useColorMode } from "@vueuse/core";
-
-const isDark = useDark();
-const colorMode = useColorMode({
-  modes: {
-    dim: "dim",
-    cafe: "cafe",
-  },
-});
-const toggleDark = useToggle(isDark);
-</script>
 <template>
-  {{ colorMode }}
-  <button @click="colorMode = 'dark'">Dark</button>
-  <button @click="colorMode = 'light'">Light</button>
-  <button @click="colorMode = 'dim'">Dim</button>
-  <button @click="colorMode = 'cafe'">cafe</button>
+  <div class="not-found">
+    <el-empty description="Page not found" />
+  </div>
 </template>
-<style></style>
+
+<script></script>
+
+<style scoped>
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>

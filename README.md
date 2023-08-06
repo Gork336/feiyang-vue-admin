@@ -75,4 +75,49 @@
 
 ### POST /getCampusOrder
 
+返回格式：
+
+```json
+{
+  "JA":10,
+  "WJ":9,
+  "HX":8
+}
+```
+
 ### POST /getWeeklyOrder
+
+返回格式：
+
+```json
+[
+    {
+        "day": "2023-07-31",
+        "order_count": 6
+    },
+    {
+        "day": "2023-08-01",
+        "order_count": 4
+    },
+    {
+        "day": "2023-08-02",
+        "order_count": 6
+    },
+    {
+        "day": "2023-08-03",
+        "order_count": 5
+    },
+    {
+        "day": "2023-08-04",
+        "order_count": 5
+    },
+    {
+        "day": "2023-08-05",
+        "order_count": 0
+    },
+    {
+        "day": "2023-08-06",
+        "order_count": 0
+    }
+]
+```
