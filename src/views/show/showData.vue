@@ -5,6 +5,8 @@ import campusOrder from "../../components/showData/campusOrder.vue";
 import weeklyOrder from "../../components/showData/weeklyOrder.vue";
 import numberCount from "../../components/showData/numberCount.vue";
 
+import testChart from "../../components/showData/testChart.vue";
+
 const totalNum = reactive({
   totalUsers: 0,
   totalTechnicians: 0,
@@ -81,14 +83,19 @@ onMounted(() => {
   </el-row>
   <el-divider />
 
-  <!-- <el-row :gutter="12">
-    <el-col :span="12"
-      ><el-card shadow="always"><campusOrder></campusOrder></el-card>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-card shadow="always">
+        <!-- <testChart></testChart> -->
+        <campusOrder></campusOrder> 
+      </el-card>
     </el-col>
     <el-col :span="12"
-      ><el-card shadow="always"><weeklyOrder></weeklyOrder></el-card
+      ><el-card shadow="always">
+        <weeklyOrder></weeklyOrder>
+        </el-card
     ></el-col>
-  </el-row> -->
+  </el-row>
 </template>
 <style scoped>
 .icon {

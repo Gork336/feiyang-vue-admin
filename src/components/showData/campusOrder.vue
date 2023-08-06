@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from "vue";
 import axios from "axios";
+//echarts
 import * as echarts from "echarts/core";
 import { TitleComponent, TooltipComponent } from "echarts/components";
 import { PieChart } from "echarts/charts";
@@ -15,6 +16,7 @@ echarts.use([
   LabelLayout,
 ]);
 onMounted(() => {
+  //获取数据
   axios
     .post("/getCampusOrders")
     .then((response) => {
@@ -23,6 +25,7 @@ onMounted(() => {
     .catch((e) => {
       console.log(e);
     });
+  //生成图表
   var chartDom = document.getElementById("main1");
   var myChart = echarts.init(chartDom);
   var option;
@@ -32,11 +35,11 @@ onMounted(() => {
       text: "各校区报修数量",
       subtext: "（累计）",
       left: "center",
-      top: "30",
     },
     tooltip: {
       trigger: "item",
     },
+
     series: [
       {
         name: "Access From",
@@ -66,7 +69,6 @@ onMounted(() => {
 </template>
 <style>
 #main1 {
-  
   height: 400px;
 }
 </style>
