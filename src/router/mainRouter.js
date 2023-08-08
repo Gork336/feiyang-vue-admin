@@ -13,6 +13,8 @@ import NotFound from "@/views/error/404.vue";
 
 import { useLoginStatusStore } from "@/stores/loginStatus";
 
+import { getCookie } from "@/components/useCookie.js";
+
 const routes = [
   { path: "/", redirect: "/login1" },
   { path: "/login1", name: "LoginPage", component: login1 },
@@ -62,7 +64,7 @@ const openMessage = () => {
 // eslint-disable-next-line no-unused-vars
 router.beforeEach(async (to, from) => {
   const loginStatus = useLoginStatusStore();
-  const localStorageLoginStatus = localStorage.getItem(
+  const localStorageLoginStatus = getCookie(
     "c8708d766768d65cb155e3272096eec8c3cc4d8971336368c833926f07d7f6a9"
   );
   if (localStorageLoginStatus === "27974a0e7646329d1d8826536f2865a04d7ff058") {

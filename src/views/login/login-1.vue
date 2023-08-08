@@ -10,6 +10,8 @@ const loginStatus = useLoginStatusStore();
 import { useThemeStatusStore } from "@/stores/themeStatus";
 const themeStatus = useThemeStatusStore();
 
+import { setCookie } from "@/components/useCookie.js";
+
 const captchaTheme = ref(themeStatus.theme);
 watchEffect(() => {
   captchaTheme.value = themeStatus.theme;
@@ -59,7 +61,7 @@ function loginSubmit() {
         if (captchaValid === "true" && accountValid === "true" && token) {
           localStorage.setItem("jwtToken", token);
           loginStatus.isAuthenticated = "true";
-          localStorage.setItem(
+          setCookie(
             "c8708d766768d65cb155e3272096eec8c3cc4d8971336368c833926f07d7f6a9",
             "27974a0e7646329d1d8826536f2865a04d7ff058"
           );
@@ -79,10 +81,11 @@ function loginSubmit() {
 
 // function toMain() {
 //   loginStatus.isAuthenticated = "true";
-//   localStorage.setItem(
+//   setCookie(
 //     "c8708d766768d65cb155e3272096eec8c3cc4d8971336368c833926f07d7f6a9",
 //     "27974a0e7646329d1d8826536f2865a04d7ff058"
 //   );
+//   console.log(document.cookie)
 //   router.push("/main");
 // }
 </script>

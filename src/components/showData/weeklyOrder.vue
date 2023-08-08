@@ -14,7 +14,7 @@ import { CanvasRenderer } from "echarts/renderers";
 const token = localStorage.getItem("jwtToken");
 
 // 设置默认请求头
-axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+axios.defaults.headers.common["Authorization"] = token;
 
 echarts.use([
   TooltipComponent,

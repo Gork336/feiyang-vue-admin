@@ -7,7 +7,7 @@ import axios from "axios";
 const token = localStorage.getItem("jwtToken");
 
 // 设置默认请求头
-axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+axios.defaults.headers.common["Authorization"] = token;
 
 //import staticOrderData from "@/staticJson/staticOrderData.json";
 

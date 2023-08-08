@@ -9,7 +9,7 @@ import numberCount from "../../components/showData/numberCount.vue";
 const token = localStorage.getItem("jwtToken");
 
 // 设置默认请求头
-axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+axios.defaults.headers.common["Authorization"] = token;
 
 const totalNum = reactive({
   totalUsers: 0,
@@ -90,13 +90,12 @@ onMounted(() => {
   <el-row :gutter="12">
     <el-col :span="12">
       <el-card shadow="always">
-        <campusOrder></campusOrder> 
+        <campusOrder></campusOrder>
       </el-card>
     </el-col>
     <el-col :span="12"
       ><el-card shadow="always">
-        <weeklyOrder></weeklyOrder>
-        </el-card
+        <weeklyOrder></weeklyOrder> </el-card
     ></el-col>
   </el-row>
 </template>

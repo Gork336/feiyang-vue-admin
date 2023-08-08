@@ -8,7 +8,7 @@ import { usePagination } from "@/components/usePagination.js"; //分页
 const token = localStorage.getItem("jwtToken");
 
 // 设置默认请求头
-axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+axios.defaults.headers.common["Authorization"] = token;
 
 //临时数据
 //import staticTechbiciansData from "@/staticJson/staticTechniciansData.json";
