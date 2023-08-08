@@ -62,11 +62,17 @@ const openMessage = () => {
 // eslint-disable-next-line no-unused-vars
 router.beforeEach(async (to, from) => {
   const loginStatus = useLoginStatusStore();
-  console.log(loginStatus.isAuthenticated + "+" + to.name);
-  console.log(loginStatus.isAuthenticated && to.name !== "LoginPage")
+  const localStorageLoginStatus = localStorage.getItem(
+    "c8708d766768d65cb155e3272096eec8c3cc4d8971336368c833926f07d7f6a9"
+  );
+  if (localStorageLoginStatus === "27974a0e7646329d1d8826536f2865a04d7ff058") {
+    loginStatus.isAuthenticated = true;
+  }
   if (!loginStatus.isAuthenticated && to.name !== "LoginPage") {
+    // console.log(loginStatus.isAuthenticated + "+" + to.name);
+    // console.log(loginStatus.isAuthenticated && to.name !== "LoginPage");
     // 将用户重定向到登录页面
-    openMessage()
+    openMessage();
     return { name: "LoginPage" };
   }
 });

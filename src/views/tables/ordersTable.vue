@@ -3,6 +3,12 @@ import { computed, onMounted, ref } from "vue";
 import { usePagination } from "@/components/usePagination";
 import axios from "axios";
 
+// 从 localStorage 获取令牌
+const token = localStorage.getItem("jwtToken");
+
+// 设置默认请求头
+axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+
 //import staticOrderData from "@/staticJson/staticOrderData.json";
 
 // 用于存储从后端获取的数据
@@ -13,7 +19,6 @@ onMounted(() => {
     .post("/getOrders")
     .then(function (response) {
       ordersData.value = response.data; // 将从后端获取的数据保存在usersData中
-      location.reload();
     })
     .catch(function (error) {
       console.log(error);

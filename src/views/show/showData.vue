@@ -5,6 +5,11 @@ import campusOrder from "../../components/showData/campusOrder.vue";
 import weeklyOrder from "../../components/showData/weeklyOrder.vue";
 import numberCount from "../../components/showData/numberCount.vue";
 
+// 从 localStorage 获取令牌
+const token = localStorage.getItem("jwtToken");
+
+// 设置默认请求头
+axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
 const totalNum = reactive({
   totalUsers: 0,

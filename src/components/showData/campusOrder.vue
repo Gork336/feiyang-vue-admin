@@ -8,6 +8,12 @@ import { PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
 
+// 从 localStorage 获取令牌
+const token = localStorage.getItem("jwtToken");
+
+// 设置默认请求头
+axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+
 echarts.use([
   TitleComponent,
   TooltipComponent,

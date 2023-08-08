@@ -59,6 +59,10 @@ function loginSubmit() {
         if (captchaValid === "true" && accountValid === "true" && token) {
           localStorage.setItem("jwtToken", token);
           loginStatus.isAuthenticated = "true";
+          localStorage.setItem(
+            "c8708d766768d65cb155e3272096eec8c3cc4d8971336368c833926f07d7f6a9",
+            "27974a0e7646329d1d8826536f2865a04d7ff058"
+          );
           router.push("/main");
           // 在此处进行需要登录后的操作，例如导航到其他页面等
         } else {
@@ -73,9 +77,14 @@ function loginSubmit() {
   }
 }
 
-function toMain() {
-  router.push("/main");
-}
+// function toMain() {
+//   loginStatus.isAuthenticated = "true";
+//   localStorage.setItem(
+//     "c8708d766768d65cb155e3272096eec8c3cc4d8971336368c833926f07d7f6a9",
+//     "27974a0e7646329d1d8826536f2865a04d7ff058"
+//   );
+//   router.push("/main");
+// }
 </script>
 
 <template>
@@ -111,9 +120,9 @@ function toMain() {
         <el-form-item>
           <el-button type="primary" @click="loginSubmit">登录</el-button>
         </el-form-item>
-        <el-form-item>
+        <!-- <el-form-item>
           <el-button type="primary" @click="toMain">去主界面（test）</el-button>
-        </el-form-item>
+        </el-form-item> -->
         <p ref="info" class="warning"></p>
       </el-form>
     </el-card>

@@ -1,7 +1,14 @@
 <script setup>
-import { computed, onMounted, ref,  reactive } from "vue";
+import { computed, onMounted, ref, reactive } from "vue";
 import axios from "axios";
+
 import { usePagination } from "@/components/usePagination.js"; //分页
+
+// 从 localStorage 获取令牌
+const token = localStorage.getItem("jwtToken");
+
+// 设置默认请求头
+axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
 //临时数据
 //import staticTechbiciansData from "@/staticJson/staticTechniciansData.json";
