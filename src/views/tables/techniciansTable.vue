@@ -23,7 +23,7 @@ function requestData() {
     .post("/getTechnicians")
     .then(function (response) {
       techniciansData.value = response.data;
-      location.reload();
+
     })
     .catch(function (error) {
       console.log(error);
@@ -80,7 +80,7 @@ function addDialogSubmit() {
     .catch((e) => {
       console.log(e);
     });
-  requestData();
+    location.reload();
 }
 
 //Detail
@@ -105,7 +105,7 @@ function EditDialogConfirm() {
     .catch((e) => {
       console.log(e);
     });
-  requestData();
+  location.reload();
 }
 //Delete
 const dialogDeleteVisible = ref(false);
@@ -125,7 +125,7 @@ function DeleteDialogConfirm() {
     .catch((e) => {
       console.log(e);
     });
-  requestData();
+    location.reload();
 }
 </script>
 <template>
