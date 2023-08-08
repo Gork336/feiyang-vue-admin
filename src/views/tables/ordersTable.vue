@@ -13,7 +13,7 @@ onMounted(() => {
     .post("/getOrders")
     .then(function (response) {
       ordersData.value = response.data; // 将从后端获取的数据保存在usersData中
-      console.log(response);
+      location.reload();
     })
     .catch(function (error) {
       console.log(error);

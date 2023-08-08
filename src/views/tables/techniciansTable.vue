@@ -16,6 +16,7 @@ function requestData() {
     .post("/getTechnicians")
     .then(function (response) {
       techniciansData.value = response.data;
+      location.reload();
     })
     .catch(function (error) {
       console.log(error);
