@@ -18,8 +18,8 @@ watchEffect(() => {
 });
 
 const info = ref(null);
-const sitekey = "10000000-ffff-ffff-ffff-000000000001";
-//const sitekey = "9ffd0b46-5be5-4711-85de-0be0ede57159";
+//const sitekey = "10000000-ffff-ffff-ffff-000000000001";
+const sitekey = "9ffd0b46-5be5-4711-85de-0be0ede57159";
 const loginForm = reactive({
   username: "",
   password: "",
@@ -27,11 +27,11 @@ const loginForm = reactive({
 });
 
 function captchaVerify(token) {
-  console.log(token);
+  //console.log(token);
   loginForm.token = token;
 }
 function loginSubmit() {
-  console.log(JSON.stringify(loginForm));
+  //console.log(JSON.stringify(loginForm));
 
   if (loginForm.username == "" || loginForm.password == "") {
     info.value.textContent = "请将用户名和密码填写完整！";
@@ -71,7 +71,7 @@ function loginSubmit() {
           // 登录失败，没有获取到有效的 token
           console.log("token为空！");
         }
-        console.log(response);
+        //console.log(response);
       })
       .catch(function (error) {
         console.log(error);

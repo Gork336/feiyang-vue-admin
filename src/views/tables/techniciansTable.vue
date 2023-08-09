@@ -1,3 +1,4 @@
+<!-- eslint-disable no-unused-vars -->
 <script setup>
 import { computed, onMounted, ref, reactive } from "vue";
 import axios from "axios";
@@ -75,7 +76,8 @@ function addDialogSubmit() {
   axios
     .post("/addTechnician", technicianForm)
     .then((response) => {
-      console.log(response);
+      //console.log(response);
+      let l=response
     })
     .catch((e) => {
       console.log(e);
@@ -100,7 +102,8 @@ function EditDialogConfirm() {
   axios
     .post("/updateTechnician", technicianForm)
     .then((response) => {
-      console.log(response);
+      //console.log(response);
+      let l=response
     })
     .catch((e) => {
       console.log(e);
@@ -120,7 +123,9 @@ function DeleteDialogConfirm() {
   axios
     .post("/deleteTechnician", willDeleteId)
     .then((response) => {
-      console.log(response);
+      //console.log(response);
+      // eslint-disable-next-line no-unused-vars
+      let l=response
     })
     .catch((e) => {
       console.log(e);

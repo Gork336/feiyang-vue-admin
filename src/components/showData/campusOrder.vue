@@ -27,7 +27,7 @@ onMounted(() => {
   axios
     .post("/getCampusOrders")
     .then((response) => {
-      console.log(response);
+      //console.log(response);
       //生成图表
       var chartDom = document.getElementById("main1");
       var myChart = echarts.init(chartDom);

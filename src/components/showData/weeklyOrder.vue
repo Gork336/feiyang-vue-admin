@@ -27,7 +27,7 @@ onMounted(() => {
   axios
     .post("/getWeeklyOrders")
     .then((response) => {
-      console.log(response);
+      //console.log(response);
 
       // 创建日期数组和订单数量数组
       const dates = [];
